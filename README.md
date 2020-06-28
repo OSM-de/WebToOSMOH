@@ -1,3 +1,7 @@
+# <a href="https://osm-de.github.io/WebToOSMOH/" target="_blank">Use the tool now</a>
+
+Click the link above to start using the tool right away.
+
 # Web to OpenStreetMap opening_hours
 
 This tool allows you to paste any website content giving opening hours of a place and returns a value for the `opening_hours`-tag.
