@@ -17,25 +17,40 @@
 		<form>
 			<table>
 				<tr>
-					<td>
-						<big><b>Copy & Paste-area for website content (will be processed into text):</b></big><br/>
+					<td class="top">
+						<big><b>Copy &amp; Paste-area for website content (will be processed into text):</b></big><br/>
 						<div id="htmlArea" contenteditable class='textarea'>Paste a table here!!</div>
 					</td>
-					<td><button type="button" onclick="handleHTMLinput();">Process</button></td>
+					<td class="lefttop">
+						<button type="button" onclick="handleHTMLinput();">Process</button>
+					</td>
 				</tr>
-			</table>
-			<table>
 				<tr>
-					<td>
+					<td class="top">
 						<big><b>Text input:</b></big><br/>
 						<textarea rows="9" id="inputArea" onblur="isURL()" placeholder="November bis Februar Montag - Freitag: 8.30 - 14.00 Uhr 
 13.03. bis 30.10.2019  Montag bis Freitag 7.30 - 15.00 Uhr"></textarea>
 					</td>
-					<td><button type="button" onclick="isURL()">Convert</button><br/>
-						<button type="reset">Clear</button></td>
+					<td class="lefttop">
+						<button type="button" onclick="isURL()">Convert</button><br/>
+						<button type="reset">Clear</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="top">
+						<big><b>Output:</b></big><br/>
+						<input type="text" id="outputArea" placeholder="Nov-Feb: Mo-Fr 08:30-14:00; Mar 13-Oct 30: Mo-Fr 07:30-15:00">
+					</td>
+					<td class="lefttop">
+						Auto copy to clipboard:<br/>
+						<small>
+						<input type="radio" name="autoCopy" value="n" id="autoCopy_1" checked="checked"/> <label for='autoCopy_1'>No</label><br/>
+						<input type="radio" name="autoCopy" value="y" id="autoCopy_2"/> <label for='autoCopy_2'>Yes</label><br/>
+						<input type="radio" name="autoCopy" value="o" id="autoCopy_3"/> <label for='autoCopy_3'>With <span style='font-family: monospace; font-size:1.25em'>opening_hours=</span> (For JOSM)</label></small>
+					</td>
 				</tr>
 			</table>
-			<input type="text" id="outputArea" placeholder="Nov-Feb: Mo-Fr 08:30-14:00; Mar 13-Oct 30: Mo-Fr 07:30-15:00">
+			
 			<button type="button" onclick="window.open('https://projets.pavie.info/yohours/?oh=' + document.getElementById('outputArea').value )">Check with YoHours</button>
 			<button type="button" onclick="window.open('https://openingh.openstreetmap.de/evaluation_tool/?EXP=' + document.getElementById('outputArea').value )">Check with opening_hours evaluation tool</button>
 		</form>

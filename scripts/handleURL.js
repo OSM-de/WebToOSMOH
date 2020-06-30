@@ -8,6 +8,25 @@ async function isURL() {
 	} else {
 		result = convert(input);
 	}
+	if (result != "No valid input") {
+		var radios = document.getElementsByName('autoCopy');
+		var autoCopy = "n";
+		for (var i = 0, length = radios.length; i < length; i++) {
+			if (radios[i].checked) {
+				autoCopy = radios[i].value;
+				break;
+			}
+		}
+		if (autoCopy != "n") {
+			var outp = document.createElement("textarea");
+			outp.value = (autoCopy == "o" ? "opening_hours=" : "") + result;
+			document.body.appendChild(outp);
+			outp.select();
+			outp.setSelectionRange(0, 99999);
+			document.execCommand("copy");
+			document.body.removeChild(outp);
+		}
+	}
 	return document.getElementById("outputArea").value = result;
 }
 async function getSourceAsDom(url) {
