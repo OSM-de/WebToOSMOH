@@ -1,0 +1,72 @@
+body {
+	text-align: center;
+	font-family: Arial, Helvetica, Sans Serif; 
+}  
+
+h1 {
+	margin-left: 0%;
+	text-align: center;
+	font-family: Arial, Helvetica, Sans Serif;
+}
+
+label {
+	text-align:center;
+	font-family: Arial, Helvetica, Sans Serif;
+}
+
+textarea, div.textarea {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	resize: none;
+	width: 700px;
+}
+
+div.textarea {
+	border:1px solid #333;
+	height: 8em;
+}
+
+select {
+	font-family: Arial, Helvetica, Sans Serif;
+	background-color: #3866af;
+	color: #fff;
+	border: none;
+	height: 25px;
+	width: 100px;
+	text-align: center;
+	border-radius: 12px; 
+}
+
+input {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	resize: none;
+	width: 50%;
+}
+
+button {
+	font-family: Arial, Helvetica, Sans Serif;
+	color: #fff;
+	background-color: #3866af;
+	border: none;
+	outline: none;
+	border-radius: 6px;  
+	margin: 4px 2px;
+	height: 30px;
+	min-width: 7em;
+}
+
+button:hover {
+	background-color: #271c9e;
+	cursor: pointer;
+}
+
+table {
+	text-align: center;
+	margin-left:auto; 
+	margin-right:auto;
+	height: 100px;
+	border-spacing: 10px;
+}
