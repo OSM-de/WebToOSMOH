@@ -26,12 +26,23 @@ async function isURL() {
 			document.execCommand("copy");
 			document.body.removeChild(outp);
 		}
+		hitOrGetUsageCounter('hit');
 	}
 	return document.getElementById("outputArea").value = result;
 }
 async function getSourceAsDom(url) {
 	let response = await fetch("https://cors-anywhere.herokuapp.com/" + url);
 	return response.text();
+}
+
+function hitOrGetUsageCounter(method) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://api.countapi.xyz/" + method + "/osm-de-telegram/webtoosmoh-usage");
+	xhr.responseType = "json";
+	xhr.onload = function() {
+		document.getElementById('usages').src = "https://img.shields.io/badge/No.%20of%20conversions-" + this.response.value + "-%233866af?style=for-the-badge";
+	}
+	xhr.send();
 }
 
 // if input was an URL, try to handle to contents accordingly

@@ -9,7 +9,7 @@
 		<script src="scripts/handleHTML.js"></script>
 		<script src="scripts/main.js"></script>
 	</head>
-	<body>
+	<body onload="hitOrGetUsageCounter('get');">
 		<h1>Web to OSM Opening Hours - OSM_de Telegram edition</h1>
 		<p>Info: URL Parsing only working partialy</p>
 		<p>Paste free text or an URL where the opening hours can be found (will work if the website uses the <a href="https://schema.org/OpeningHoursSpecification" target="_blank">OpeningHours specification</a> of Schema.org)</p>
@@ -50,7 +50,7 @@
 					</td>
 				</tr>
 			</table>
-			
+			<img src="" id="usages"/><br/>
 			<button type="button" onclick="window.open('https://projets.pavie.info/yohours/?oh=' + document.getElementById('outputArea').value )">Check with YoHours</button>
 			<button type="button" onclick="window.open('https://openingh.openstreetmap.de/evaluation_tool/?EXP=' + document.getElementById('outputArea').value )">Check with opening_hours evaluation tool</button>
 		</form>
