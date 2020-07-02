@@ -40,7 +40,7 @@ function hitOrGetUsageCounter(method) {
 	xhr.open("GET", "https://api.countapi.xyz/" + method + "/osm-de-telegram/webtoosmoh-usage");
 	xhr.responseType = "json";
 	xhr.onload = function() {
-		document.getElementById('usages').src = "https://img.shields.io/badge/No.%20of%20conversions-" + this.response.value + "-%233866af?style=for-the-badge";
+		document.getElementById('usages').src = "https://img.shields.io/badge/dynamic/json?color=%233866af&label=no.%20of%20conversions&query=%24.value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fosm-de-telegram%2Fwebtoosmoh-usage&style=for-the-badge";
 	}
 	xhr.send();
 }
