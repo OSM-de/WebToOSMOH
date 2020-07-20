@@ -47,83 +47,77 @@ function hitOrGetUsageCounter(method) {
 
 // if input was an URL, try to handle to contents accordingly
 function handleShemaOrg(string) {
-	// this handles opening hours when written in markdown
+	var mrContentResponse = "", mrTagResponse = "", jsonResponse = "";
+	
+	// Microdata and RDFa for schema.org/openingHours (ignoring openingHoursSpecification for MD and RDFA for now)
+	var microRdfaContentRegex = /<[^>*] (property|itemprop)=['"]openingHours['"][^>*]?content=('([^']*)'|"([^"]*)")[^>*]?>/gi
+	var microRdfaTagRegex     = /<[^>*] (property|itemprop)=['"]openingHours['"][^>*]?>([^<]*)</gi
+
+	// Microdata or RDFa matching with content attribute
+	let outputString = " ";
+	do {
+		m = microRdfaContentRegex.exec(string);
+		if (m) {
+			outputString = outputString + m[2] + " ";
+		}
+	} while(m);
+	if (convert(outputString) === "No valid input") {
+		mrContentResponse = "";
+	} else {
+		mrContentResponse = convert(outputString);
+	}
+	
+	// Microdata or RDFa matching with content in tag
+	outputString = " ";
+	do {
+		m = microRdfaTagRegex.exec(string);
+		if (m) {
+			outputString = outputString + m[2] + " ";
+		}
+	} while(m);
+	if (convert(outputString) === "No valid input") {
+		mrTagResponse = "";
+	} else {
+		mrTagResponse = convert(outputString);
+	}
+
+	// JSON+LD for openingHours and openingHoursSpecification, ignoring validFrom validTil for now
+	outputString = " ";
 	let el = document.createElement("html");
 	el.innerHTML = string;
-	let microOH = $(el).find("[itemprop='openingHours']");
-	let microOHResponse = "" + $(microOH).attr( "content");
-	microOHResponse = convert(microOHResponse);
-	if (microOHResponse === "No valid input"){
-		microOHResponse = "";
-	}
-	let micro = "" + $(el).find("[itemprop='openingHoursSpecification']").text();
-	let microResponse = convert(micro);
-	if (microResponse === "No valid input"){
-		microResponse = "";
-	}
-	microResponse = (microOHResponse + " " + microResponse).trim();
-	//this handles opening hours noted in RDFa
-	let rdfaOH = "" + $(el).find("[property='openingHours']").attr("content");
-	rdfaOH = convert(rdfaOH);
-	if (rdfaOH === "No valid input"){
-		rdfaOH = "";
-	}
-	let rdfa = "" + $(el).find("[property='openingHoursSpecification']").text();
-	rdfa = convert(rdfa);
-	if (rdfa ==="No valid input"){
-		rdfa = "";
-	}
-	let rdfaResponse = (rdfaOH + " " + rdfa).trim();
-	// this handles opening hours specified in the script application/ld+json
 	let scripts = "" + $(el).find("[type='application/ld+json']").html();
-	console.log(scripts);
-	let scriptResponse = scriptHandeling(scripts);
-
-	if (scriptResponse === "No valid input"){
-		scriptResponse = "";
+	if (scripts != "") {
+		var jsonLd = JSON.parse(scripts);
+		var jsonOH = jsonLd.openingHours;
+		if (!(jsonOH === undefined)) {
+			if (Array.isArray(jsonOH)) {
+				for (i in jsonOH) {
+					outputString = outputString + jsonOH[i] + " ";
+				}
+			} else {
+				outputString = outputString + jsonOH + " ";
+			}
+		}
+		var jsonOHS = jsonLd.openingHoursSpecification;
+		if (!(jsonOHS === undefined)) {
+			if (Array.isArray(jsonOHS)) {
+				for (i in jsonOHS) {
+					outputString = outputString + " " + jsonOHS[i].dayOfWeek + " " + jsonOHS[i].opens + "-" + jsonOHS[i].closes;
+				}
+			} else {
+				outputString = outputString + " " + jsonOHS.dayOfWeek + " " + jsonOHS.opens + "-" + jsonOHS.closes;
+			}
+		}
 	}
-	let result = (microResponse + " " + rdfaResponse + " " + scriptResponse).trim();
+	if (convert(outputString) === "No valid input") {
+		jsonResponse = "";
+	} else {
+		jsonResponse = convert(outputString);
+	}
+	
+	let result = (mrContentResponse + " " + mrTagResponse + " " + jsonResponse).trim();
 	if (result === ""){
 		result = "No valid input";
 	}
 	return result.trim();
-}
-// script processing for URL input
-function scriptHandeling(input) {
-	let result = "";
-	let outputString = " ";
-	outputString = outputString + input;
-	const cutOutScript = /<script type="application\/ld\+json">(.|\n)+("openingHoursSpecification":.+?|"openingHours":.+?)<\/script>/g;
-	outputString = outputString.replace(cutOutScript,(_1,_2,_3) => {
-		return _3;
-	});
-	const cutGroupOpeningHours = /"openingHours":\[(.*)\]/g;
-	outputString = outputString.replace(cutGroupOpeningHours,(_1,_2)=>{
-		return _2.replace(/\"/g,'');
-	});
-	const cutNotGroupedOpeningHours = /"openingHours":\s"(.+?)",/g;
-	outputString = outputString.replace(cutNotGroupedOpeningHours, (_1,_2)=>{
-		return _2;
-	});
-	const cutRemainingNotRelevantPart = /("openingHoursSpecification":\[.+?]).+/g;
-	outputString = outputString.replace(cutRemainingNotRelevantPart,(_1,_2) => {
-		return _2;
-	});
-	const cutJSONParts = /(http:\/\/schema.org\/|{"@type":"OpeningHoursSpecification",|},|"dayOfWeek":|"openingHoursSpecification":\[|\]|})/g;
-	outputString = outputString.replace(cutJSONParts,"");
-	const removeSeperators = /(","|":")/g;
-	outputString = outputString.replace(removeSeperators,' ');
-	outputString = outputString.replace(/""/g,' ');
-	outputString = outputString.replace(/closes/g,"-");
-	outputString = outputString.replace(/"|opens/g,"");
-	result = result + outputString;
-	result = result.replace(/\s+/g,' ');
-	result = result.replace(/(\.[0-9]{2}\.)\s([0-9]{2}\.)/g,(_1,_2,_3)=>{
-		return _2 + " - " + _3;
-	});
-	result = result.replace(/(:[0-9][0-9])\s([0-9][0-9]:)/g,(_1,_2,_3)=>{
-		return _2 + " - " + _3;
-	});
-	result = convert(result);
-	return result;
 }
