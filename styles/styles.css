@@ -1,7 +1,7 @@
 body {
 	text-align: center;
-	font-family: Arial, Helvetica, Sans Serif; 
-}  
+	font-family: Arial, Helvetica, Sans Serif;
+}
 
 h1 {
 	margin-left: 0%;
@@ -27,6 +27,12 @@ div.textarea {
 	height: 8em;
 }
 
+[contentEditable]:empty:not(:focus):before {
+  content: attr(placeholder);
+  color: rgb(117, 117, 117);
+  pointer-events: none;
+}
+
 select {
 	font-family: Arial, Helvetica, Sans Serif;
 	background-color: #3866af;
@@ -35,7 +41,7 @@ select {
 	height: 25px;
 	width: 100px;
 	text-align: center;
-	border-radius: 12px; 
+	border-radius: 12px;
 }
 
 input#outputArea {
@@ -52,7 +58,7 @@ button {
 	background-color: #3866af;
 	border: none;
 	outline: none;
-	border-radius: 6px;  
+	border-radius: 6px;
 	margin: 4px 2px;
 	height: 30px;
 	min-width: 7em;
@@ -65,7 +71,7 @@ button:hover {
 
 table {
 	text-align: center;
-	margin-left:auto; 
+	margin-left:auto;
 	margin-right:auto;
 	height: 100px;
 	border-spacing: 10px;
