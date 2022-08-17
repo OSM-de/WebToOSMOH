@@ -1,4 +1,4 @@
-# <a href="https://osm-de.github.io/WebToOSMOH/" target="_blank">Use the tool now</a>
+# <a href="https:/www.webmappying.cyou/WebToOSMOH/" target="_blank">Use the tool now</a>
 
 Click the link above to start using the tool right away.
 
