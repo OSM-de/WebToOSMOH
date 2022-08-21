@@ -6,9 +6,65 @@
 		<link rel="stylesheet" href="styles/styles.css">
 		<script src="https://momentjs.com/downloads/moment.min.js"></script>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/gh/OSM-de/WebToOSMOH@master/scripts/handleURL.js"></script>
-		<script src="https://cdn.jsdelivr.net/gh/OSM-de/WebToOSMOH@master/scripts/handleHTML.js"></script>
-		<script src="https://cdn.jsdelivr.net/gh/OSM-de/WebToOSMOH@master/scripts/main.js"></script>
+		<script>
+			for ( 
+				var includeFiles = [ "./scripts/day/addComma.js", "./scripts/day/addMissingZerosDays.js",
+				"./scripts/day/bindDaysTogether.js", "./scripts/day/combineDaysWithSameTimes.js", 
+				"./scripts/day/detectNewDay.js", "./scripts/day/handleNumeralDates.js",
+				"./scripts/day/oneDaySpanCorrection.js", "./scripts/day/orderDaysAndTime.js", 
+				"./scripts/day/pullDaysTogether.js", "./scripts/day/sortDays.js",
+				"./scripts/i18n/de/germanWords.js", "./scripts/i18n/de/replaceGermanMonths.js", 
+				"./scripts/i18n/de/shortenDaysGer.js", "./scripts/i18n/en/englishWords.js",
+				"./scripts/i18n/en/replaceEnglishMonths.js", "./scripts/i18n/en/shortenDaysEng.js", 
+				"./scripts/meta/addColon.js", "./scripts/meta/addMissingZeros.js", 
+				"./scripts/meta/checkResult.js", "./scripts/meta/cleanUp.js", 
+				"./scripts/meta/handleSortings.js", "./scripts/meta/removeUnNeededSpace.js",
+				"./scripts/meta/removeUnwantedText.js", "./scripts/meta/removeWrongColons.js", 
+				"./scripts/meta/replaceComma.js", "./scripts/meta/replaceEmptyRule.js",
+				"./scripts/meta/replaceSymbols.js", "./scripts/meta/_PScript.js", 
+				"./scripts/month/addColonOnMonths.js", "./scripts/month/addMonthsToEveryDays.js",
+				"./scripts/month/cleanUpMonthRange.js", "./scripts/month/combineSameMonths.js", 
+				"./scripts/month/correctMonthDays.js", "./scripts/month/correctSyntaxBetweenMonthAndDay.js", 
+				"./scripts/month/handleMonthDays.js", "./scripts/month/monthRangeEndCorrection.js", 
+				"./scripts/month/monthsAddSpace.js", "./scripts/month/multipleSpecificDates.js", 
+				"./scripts/month/pullMonthsTogether.js", "./scripts/month/removeAdditionalZeroesFromMonths.js", 
+				"./scripts/month/removeYearFromMonth.js", "./scripts/month/seperateMonthAndDays.js", 
+				"./scripts/month/sortMonths.js", "./scripts/month/switchDayAndMonthPosition.js", 
+				"./scripts/time/cutOverlappingTime.js", "./scripts/time/detectNextTime.js", 
+				"./scripts/time/handleAdditiveTime.js", "./scripts/time/handlePM.js", 
+				"./scripts/time/handleUnspecificClosingTime.js", "./scripts/handleHTML.js", 
+				"./scripts/handleURL.js", "./scripts/main.js", "./scripts/day/addComma.js", 
+				"./scripts/day/addMissingZerosDays.js", "./scripts/day/bindDaysTogether.js", 
+				"./scripts/day/combineDaysWithSameTimes.js", "./scripts/day/detectNewDay.js", 
+				"./scripts/day/handleNumeralDates.js", "./scripts/day/oneDaySpanCorrection.js", 
+				"./scripts/day/orderDaysAndTime.js", "./scripts/day/pullDaysTogether.js", 
+				"./scripts/day/sortDays.js", "./scripts/i18n/de/germanWords.js", 
+				"./scripts/i18n/de/replaceGermanMonths.js", "./scripts/i18n/de/shortenDaysGer.js", 
+				"./scripts/i18n/en/englishWords.js", "./scripts/i18n/en/replaceEnglishMonths.js", 
+				"./scripts/i18n/en/shortenDaysEng.js", "./scripts/meta/addColon.js", 
+				"./scripts/meta/addMissingZeros.js", "./scripts/meta/checkResult.js", 
+				"./scripts/meta/cleanUp.js", "./scripts/meta/handleSortings.js", 
+				"./scripts/meta/removeUnNeededSpace.js", "./scripts/meta/removeUnwantedText.js", 
+				"./scripts/meta/removeWrongColons.js", "./scripts/meta/replaceComma.js", 
+				"./scripts/meta/replaceEmptyRule.js", "./scripts/meta/replaceSymbols.js", 
+				"./scripts/month/addColonOnMonths.js", "./scripts/month/addMonthsToEveryDays.js", 
+				"./scripts/month/cleanUpMonthRange.js", "./scripts/month/combineSameMonths.js", 
+				"./scripts/month/correctMonthDays.js", "./scripts/month/correctSyntaxBetweenMonthAndDay.js", 
+				"./scripts/month/handleMonthDays.js", "./scripts/month/monthRangeEndCorrection.js", 
+				"./scripts/month/monthsAddSpace.js", "./scripts/month/multipleSpecificDates.js", 
+				"./scripts/month/pullMonthsTogether.js", "./scripts/month/removeAdditionalZeroesFromMonths.js", 
+				"./scripts/month/removeYearFromMonth.js", "./scripts/month/seperateMonthAndDays.js", 
+				"./scripts/month/sortMonths.js", "./scripts/month/switchDayAndMonthPosition.js", 
+				"./scripts/time/cutOverlappingTime.js", "./scripts/time/detectNextTime.js", 
+				"./scripts/time/handleAdditiveTime.js", "./scripts/time/handlePM.js", 
+				"./scripts/time/handleUnspecificClosingTime.js", "./scripts/handleHTML.js", 
+				"./scripts/handleURL.js", "./scripts/main.js" ]
+				, index = 0; index < includeFiles.length; ++index
+			)
+			{
+				$.getScript(includeFiles[index].replace("./", "https://cdn.jsdelivr.net/gh/OSM-de/WebToOSMOH@master/scripts/"));
+			}
+		</script>
 	</head>
 	<body>
 		<h1>Web to OSM Opening Hours — <a href="https://t.me/OSM_de">OSM_de Telegram</a> edition</h1>
