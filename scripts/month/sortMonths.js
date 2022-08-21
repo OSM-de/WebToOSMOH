@@ -1,6 +1,3 @@
-import { addColonOnMonths } from "./addColonOnMonths";
-import { cleanUpMonthRange } from "./cleanUpMonthRange";
-
 function sortMonths(input) {
 	const months = /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/g;
 	const monthRangFinder = new RegExp("(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)([,\\-])?" +
